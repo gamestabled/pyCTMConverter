@@ -13,11 +13,15 @@ def setBit(value: int, bitIndex: int) -> int:
 
 
 def bizhawkCirclePadCoordToCTM(bizhawkCoord: int) -> int:
-    ctmCoord = round((bizhawkCoord * 0.9905) + 20.731)
-    if abs(ctmCoord <= 21):
+    if bizhawkCoord < 0:
+        ctmCoord = round((bizhawkCoord * 0.9905) - 20.731)
+    else:
+        ctmCoord = round((bizhawkCoord * 0.9905) + 20.731)
+
+    if abs(ctmCoord) <= 21:
         return 0
     else:
-        return clamp(ctmCoord, -128, 127)
+        return clamp(ctmCoord, -154, 154)
 
 
 def bizhawkButtonDataToCTMButtonData(bizhawkMovieFrame: BizhawkMovie.Frame) -> bytes:
